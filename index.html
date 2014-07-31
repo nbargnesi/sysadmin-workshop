@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Sysadmin Workshop</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/python/styles/screen.css">
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Sysadmin Workshop</h1>
+	</header>
+
+	<section class="slide cover" id="Cover">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Sysadmin Workshop</h2>
+            <p>
+                <a href="http://nbargnesi.github.io/sysadmin-workshop">
+                    http://nbargnesi.github.io/sysadmin-workshop
+                </a>
+            </p>
+            <!--
+                To apply styles to the certain slides
+                set slide ID to get needed elements
+                -->
+            <style>
+                #Cover h2 {
+                    margin:30px 0 0;
+                    text-align:center;
+
+                    font-size:70px;
+                    }
+                #Cover p {
+                    margin:10px 0 0;
+                    text-align:center;
+                    font-style:italic;
+                    font-size:20px;
+                    }
+                    #Cover p a {
+                    }
+            </style>
+        </div>
+	</section>
+
+    <section class="slide shout">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Pipes</h2>
+		</div>
+    </section>
+
+    <section class="slide">
+        <div style="background: #fff url(img/bg.png);">
+
+            <h3><strong>Pipes &mdash; Sysadmin Workshop</strong></h3>
+            <br/>
+            <p>
+            Pipes connect multiple commands together sending the output of one
+            as input to another.
+            </p>
+            <p>
+            Under the covers, an operating system pipe is shared between the two
+            programs. The first program writes to the pipe; the second program
+            reads from it.
+            </p>
+            <p>
+            Example: <code>who | wc -l</code>
+            </p>
+		</div>
+    </section>
+
+    <section class="slide shout">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Filters</h2>
+		</div>
+    </section>
+
+    <section class="slide">
+        <div style="background: #fff url(img/bg.png);">
+
+            <h3><strong>Filters &mdash; Sysadmin Workshop</strong></h3>
+            <br/>
+            <p>
+            Strictly speaking, filters are the elements that together form a
+            <code>command pipeline</code>.
+            </p>
+            <p>
+            The command pipeline <code>who | wc -l</code> has two filters:
+            <em>who</em> and <em>wc</em>.
+            </p>
+            <p>
+            Example:
+            <br/>
+            <code>find / -name '*.tar.[gz|bz2]' -exec ls -s "{}" \; | sort -n | vim -</code>
+            </p>
+		</div>
+    </section>
+
+    <section class="slide shout">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Redirection</h2>
+		</div>
+    </section>
+
+    <section class="slide">
+        <div style="background: #fff url(img/bg.png);">
+
+            <h3><strong>Redirection Part I &mdash; Sysadmin Workshop</strong></h3>
+            <br/>
+            <p>
+            Three files are typically open in every program. These are
+            <code>stdin</code>, <code>stdout</code>, and <code>stderr</code>.
+            </p>
+            <p>
+                Input (<code>stdin</code>) is file descriptor <code>0</code>.
+                Output (<code>stdout</code>) is file descriptor <code>1</code>.
+                Error output (<code>stderr</code>) is file descriptor <code>2</code>.
+            </p>
+            <p>
+            Demo: <code>vim</code>
+            </p>
+		</div>
+    </section>
+
+    <section class="slide">
+        <div style="background: #fff url(img/bg.png);">
+            <h3><strong>Redirection Part II &mdash; Sysadmin Workshop</strong></h3>
+            <br/>
+            <p>
+            <ul>
+                <li>Redirecting <code>stdin</code>: <code>&lt;</code></li>
+                <li>Redirecting <code>stdout</code>: <code>1&gt;;</code></li>
+                <li>Redirecting <code>stderr</code>: <code>2&gt;</code></li>
+            </ul>
+            </p>
+            <p>
+            Basically two ways to do output redirection &mdash; <code>M>N</code>
+            or <code>M>&N</code>. The former redirects file descriptor
+            <code>M</code> to file <code>N</code>. The latter redirects file
+            descriptor <code>M</code> to where file descriptor <code>N</code>
+            currently points.
+            </p>
+            <p>
+            Demo: <code>&gt;&amp;2</code>, <code>&gt;&gt;log 2&gt;&amp;1</code>, <code>echo foo &gt;&amp;2 | wc -l</code>
+            </p>
+		</div>
+    </section>
+
+    <section class="slide shout">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Input</h2>
+		</div>
+    </section>
+
+    <section class="slide">
+        <div style="background: #fff url(img/bg.png);">
+
+            <h3><strong>Input &mdash; Sysadmin Workshop</strong></h3>
+            <br/>
+            <p>
+            Use the <code>read</code> built-in bash command to take user input.
+            The read command takes a number of options that can alter its
+            behavior.
+            </p>
+            <p>
+            Demo: <code>read RESPONSE</code>, <code>read -a RESPONSE</code>
+            </p>
+		</div>
+    </section>
+
+    <section class="slide shout">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Special Variables</h2>
+		</div>
+    </section>
+
+    <section class="slide">
+        <div style="background: #fff url(img/bg.png);">
+
+            <h3><strong>Special Variables &mdash; Sysadmin Workshop</strong></h3>
+            <br/>
+            <p>
+            <ul>
+                <li class="next"><code>$1</code>, <code>$2</code>, ... &mdash; positional parameters</li>
+                <li class="next"><code>$@</code> &mdash; positional parameters (array)</li>
+                <li class="next"><code>$#</code> &mdash; number of positional parameters</li>
+                <li class="next"><code>$*</code> &mdash; IFS expansion of positional parameters</li>
+                <li class="next"><code>$-</code> &mdash; current shell options</li>
+                <li class="next"><code>$$</code> &mdash; process id of current shell</li>
+                <li class="next"><code>$_</code> &mdash; most recent parameter</li>
+                <li class="next"><code>$IFS</code> &mdash; input field separator</li>
+                <li class="next"><code>$?</code> &mdash; most recent foreground program exit status</li>
+                <li class="next"><code>$!</code> &mdash; most recent background program process id</li>
+                <li class="next"><code>$0</code> &mdash; name of shell or script</li>
+            </ul>
+            </p>
+		</div>
+    </section>
+
+    <section class="slide shout">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Exit Codes</h2>
+		</div>
+    </section>
+
+    <section class="slide">
+        <div style="background: #fff url(img/bg.png);">
+
+            <h3><strong>Exit Codes &mdash; Sysadmin Workshop</strong></h3>
+            <br/>
+            <p>
+            The <code>$?</code> special variable can be used to string together
+            commands and control the execution of scripts.
+            </p>
+            <p>
+            Demo: touch with <code>$?</code>, inline if-touch, touch <code>||</code>
+            </p>
+		</div>
+    </section>
+
+    <section class="slide shout">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Simple Scripting</h2>
+		</div>
+    </section>
+
+    <section class="slide">
+        <div style="background: #fff url(img/bg.png);">
+
+            <h3><strong>Simple Scripting &mdash; Sysadmin Workshop</strong></h3>
+            <br/>
+            <p>
+            <ol>
+                <li class="next">Create a file with a <code>.sh</code> extension</li>
+                <li class="next">The first line of the script is the interpreter to use
+                <ul>
+                    <li class="next">E.g., <code>#!/usr/bin/env bash</code></li>
+                </ul>
+                <li class="next">Make it executable (<code>chmod +x ...</code>)</li>
+                <li class="next">Edit and run</li>
+            </ol>
+            </p>
+            <p>
+            Demo: create a directory as needed and make sure it's writable - fail if not
+            </p>
+		</div>
+    </section>
+
+    <section class="slide shout">
+        <div style="background: #fff url(img/bg.png);">
+            <h2>Other Topics</h2>
+		</div>
+    </section>
+
+	<section class="slide">
+        <div>
+            <h3><strong>Other Topics &mdash; Sysadmin Workshop</strong></h3>
+            <h4>(see coreutils for more)</h4>
+            <br/>
+            <ol>
+                <li>chown</li>
+                <li>chmod</li>
+                <li>chattr</li>
+                <li>cut</li>
+                <li>sort</li>
+                <li>sed</li>
+                <li>awk</li>
+            </ol>
+        </div>
+    </section>
+
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+</body>
+</html>
